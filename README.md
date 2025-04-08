@@ -14,27 +14,6 @@ minikube start
 minikube addons enable ingress
 ```
 
-### Create k8s resources ###
-```bash
-kubectl apply -f k8s/app.yaml
-kubectl apply -f k8s/ingress.yaml
-```
-
-### Add ingress ip to hosts ####
-```bash
-kubectl get ingress --watch
-
-# Output
-NAME               CLASS   HOSTS            ADDRESS   PORTS   AGE
-demo-app-ingress   nginx   demo-app.local             80      4s
-demo-app-ingress   nginx   demo-app.local   192.168.49.2   80      22s
-```
-
-Add `192.168.49.2    demo-app.local` in the `/etc/hosts` file.
-
-### Access the application ###
-Open browser and go to `http://demo-app.local`
-
 ### Install argocd ###
 ```bash
 kubectl create namespace argocd
@@ -56,3 +35,24 @@ Access the argocd UI from browser. With `admin` username and the password from o
 ```bash
 minikube service argocd-server -n argocd
 ```
+
+Install the root-app in ArgoCD
+
+```bash
+kubectl apply -f k8s/argocd/root-app.yaml
+```
+
+### Add ingress ip to hosts ####
+```bash
+kubectl get ingress -n demo-app --watch
+
+# Output
+NAME               CLASS   HOSTS            ADDRESS   PORTS   AGE
+demo-app-ingress   nginx   demo-app.local             80      4s
+demo-app-ingress   nginx   demo-app.local   192.168.49.2   80      22s
+```
+
+Add `192.168.49.2    demo-app.local` in the `/etc/hosts` file.
+
+### Access the application ###
+Open browser and go to `http://demo-app.local`
