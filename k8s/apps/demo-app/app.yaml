@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: demo-app
-        image: sazzadr/argocd-demo:0.1
+        image: sazzadr/argocd-image-updater:0.1
         ports:
         - containerPort: 5000
 ---

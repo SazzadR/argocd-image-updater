@@ -1,11 +1,11 @@
 ### Build image
 ```bash
-docker build -t sazzadr/argocd-demo:0.1 .
+docker build -t sazzadr/argocd-image-updater:0.1 .
 ```
 
 ### Push image
 ```bash
-docker push sazzadr/argocd-demo:0.1
+docker push sazzadr/argocd-image-updater:0.1
 ```
 
 ### Start minikube ###
@@ -21,7 +21,7 @@ kubectl create namespace argocd
 helm repo add argo https://argoproj.github.io/argo-helm
 helm repo update
 
-helm install argocd argo/argo-cd -n argocd -f k8s/argocd/values.yaml
+helm install argocd argo/argo-cd -n argocd -f k8s/argocd/argocd-values.yaml
 ```
 
 Get the argocd admin password.
@@ -47,8 +47,8 @@ kubectl apply -f k8s/argocd/root-app.yaml
 kubectl get ingress -n demo-app --watch
 
 # Output
-NAME               CLASS   HOSTS            ADDRESS   PORTS   AGE
-demo-app-ingress   nginx   demo-app.local             80      4s
+NAME               CLASS   HOSTS            ADDRESS        PORTS   AGE
+demo-app-ingress   nginx   demo-app.local                  80      4s
 demo-app-ingress   nginx   demo-app.local   192.168.49.2   80      22s
 ```
 
