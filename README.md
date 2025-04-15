@@ -69,4 +69,16 @@ Open browser and go to `http://demo-app.local`
 
 ```bash
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj-labs/argocd-image-updater/stable/manifests/install.yaml
+
+
+kubectl edit application demo-app -n argocd
+
+annotations:
+  argocd-image-updater.argoproj.io/image-list: sazzadr/argocd-image-updater
+  argocd-image-updater.argoproj.io/argocd-image-updater.update-strategy: latest/newest-build
+  argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/git-creds
+
+
+kubectl -n argocd create secret generic git-creds \
+  --from-file=sshPrivateKey=/home/sazzad/.ssh/id_rsa
 ```
