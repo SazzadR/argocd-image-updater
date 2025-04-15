@@ -56,3 +56,17 @@ Add `192.168.49.2    demo-app.local` in the `/etc/hosts` file.
 
 ### Access the application ###
 Open browser and go to `http://demo-app.local`
+
+
+### Install argocd-image-updater ###
+
+[//]: # (```bash)
+
+[//]: # (helm install argocd-image-updater argo/argocd-image-updater -n argocd -f k8s/argocd/image-updater.yaml)
+
+[//]: # (```)
+
+
+```bash
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj-labs/argocd-image-updater/stable/manifests/install.yaml
+```
